@@ -28,7 +28,7 @@ export default function Results({ result, onRestart, onRandom }) {
       )}
 
       <div className="notice">
-        Searches are generated GitHub queries, not endorsements. Curated Quests are manually suggested jumping-off points.
+        GitHub searches need you to be logged in to work. Searches are generated GitHub queries, not endorsements. Curated Quests are manually suggested jumping-off points.
       </div>
 
       <div className="quest-grid compact">
