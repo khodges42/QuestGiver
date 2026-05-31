@@ -1476,7 +1476,21 @@ select {
   grid-template-columns: minmax(0, 1fr) 150px;
   padding: .75rem;
 }
+.dialogue-box {
+  overflow: visible;
+  position: relative;
+}
 
+.dialogue-box::before,
+.dialogue-box::after {
+  z-index: 5;
+  pointer-events: none;
+}
+
+.content-panel,
+.dialogue-wrap {
+  overflow: visible;
+}
 .primary-search-card h3 {
   font-size: 2.15rem;
 }
