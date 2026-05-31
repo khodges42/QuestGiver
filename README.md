@@ -1,26 +1,45 @@
 # QuestGiver
 
-v0.3 edit pass: locked palette, Google Fonts, class-as-dialogue, compact viewport-first layout, final search question, CSS castle-wall background, and floaty magic effects.
+QuestGiver is a small, friendly RPG-themed site for finding open source projects.
 
-**QuestGiver** is a static RPG-themed open source quest finder.
+Visit it here: [questgiver.khod.net](https://questgiver.khod.net)
 
-It does not crawl GitHub, store accounts, call a backend, or require tokens. It generates useful search links and mixes them with curated project suggestions.
+The wizard asks a few questions, gives you a class, and points you toward GitHub searches and curated projects that might be a good place to start. It is meant to make open source feel less like a locked castle gate and more like a quest board.
 
-## Features
+## What It Does
 
-- React + Vite static site
-- Cloudflare Pages friendly
-- RPG dialogue flow
-- Class picker
-- 4 useful questions + 1 nonsense question
-- "I Am In A Hurry, Wizard" quick-search mode
-- Random quest button
-- Generated GitHub search links
-- Curated quest cards
-- Special QuestGiver repo card
-- Local-only preferences using `localStorage`
+- Guides visitors through a playful dialogue tree
+- Helps beginners with a level 1 adventurer guide
+- Generates GitHub search links for possible projects
+- Includes curated quests and random quest discovery
+- Offers a quick-search mode for impatient adventurers
+- Keeps preferences local with `localStorage`
+- Runs as a static React + Vite site with no backend
+- Includes a Hall of Heroes for contributors
 
-## Run locally
+QuestGiver does not crawl GitHub, store accounts, call a backend, or require tokens. Generated search cards are just search links, not endorsements of every result.
+
+## Hall Of Heroes
+
+Contributors can add themselves to:
+
+```text
+src/data/heroes.json
+```
+
+Use this shape:
+
+```json
+{
+  "name": "Your Name",
+  "quest": "What you contributed",
+  "date": "YYYY-MM-DD"
+}
+```
+
+After your pull request is merged, your name can appear in the Hall of Heroes on the site.
+
+## Run Locally
 
 ```bash
 npm install
@@ -38,9 +57,29 @@ Cloudflare Pages settings:
 - Build command: `npm run build`
 - Build output directory: `dist`
 
-## Asset replacement
+## Project Data
 
-Drop your own pixel art into:
+Curated quests live in:
+
+```text
+src/data/curatedQuests.js
+```
+
+Hero classes live in:
+
+```text
+src/data/classes.js
+```
+
+Hall of Heroes entries live in:
+
+```text
+src/data/heroes.json
+```
+
+## Assets
+
+Drop replacement art into:
 
 ```text
 public/assets/questgiver.png
@@ -56,40 +95,8 @@ Recommended sizes:
 
 If these files do not exist, the app uses CSS pixel-art placeholders.
 
-## Notes
+## Contributing
 
-Generated Search cards are plain search links. They are **not endorsements** of whatever appears in GitHub results.
+Open source quests are welcome. Small fixes, docs improvements, accessibility work, new curated quests, and Hall of Heroes entries all count.
 
-Curated Quest cards are manually suggested projects. Edit them in:
-
-```text
-src/data/curatedQuests.js
-```
-
-## v0.3 notes
-
-- Generated searches are now repo-focused and less issue-label-dependent.
-- Results page uses a primary search card and compact map cards.
-- Hurry Wizard layout has been tightened.
-
-## v0.4 notes
-
-- Explicitly references `public/assets/background.png` as the page background.
-- Character frame now has pixel sky/grass fallback styling.
-- Questgiver is centered/lifted in the frame.
-- Intro/dialogue cards now have speech-bubble pointers.
-
-## v0.5 notes
-
-- `public/assets/background.png` is now treated as a repeating stone-wall tile.
-- The wizard frame has a code-generated pixel sky, grass, ground texture, and slow drifting clouds.
-- Intro/dialogue panels are now visible cream speech bubbles.
-- Footer includes attribution for Pixollie, Cainos, and Google Fonts.
-- Subtitle and footer copy updated.
-
-## v0.6 notes
-
-- Intro page now uses a dedicated visible speech bubble.
-- Sky/grass panel no longer has the striped/barcode ground.
-- Clouds are constrained to the sky region.
-- Result map uses fewer columns and roomier cards.
+Repo: [github.com/khodges42/questgiver](https://github.com/khodges42/questgiver)

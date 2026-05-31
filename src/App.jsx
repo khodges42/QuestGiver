@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
-import { Dice5, FastForward, RotateCcw } from "lucide-react";
+import { Dice5, FastForward, RotateCcw, Trophy } from "lucide-react";
 import DialogueBox from "./components/DialogueBox.jsx";
+import HallOfHeroes from "./components/HallOfHeroes.jsx";
 import HeroSprite from "./components/HeroSprite.jsx";
+import LevelOneGuide from "./components/LevelOneGuide.jsx";
 import PixelFrame from "./components/PixelFrame.jsx";
 import QuickSearch from "./components/QuickSearch.jsx";
 import Results from "./components/Results.jsx";
@@ -19,6 +21,18 @@ function shuffle(items) {
 
 function sample(items, count) {
   return shuffle(items).slice(0, count);
+}
+
+function beginnerQuestion() {
+  return {
+    id: "level-one-check",
+    kind: "beginner",
+    text: "Before the road forks, tell me truly: are your boots ready for open source adventure?",
+    choices: [
+      { label: "Wait, I am a level 1 adventurer, I need help!", action: "levelOneGuide" },
+      { label: "I know the road. Ask your questions, wizard.", action: "continueAdventure" }
+    ]
+  };
 }
 
 function classQuestion() {
@@ -49,7 +63,7 @@ function finalSearchQuestion() {
 function makeQuestionRun() {
   const useful = sample(usefulQuestions, 4).map((question) => ({ ...question, kind: "useful" }));
   const nonsense = sample(nonsenseQuestions, 1).map((question) => ({ ...question, kind: "nonsense" }));
-  return [classQuestion(), ...shuffle([...useful, ...nonsense]), finalSearchQuestion()];
+  return [beginnerQuestion(), classQuestion(), ...shuffle([...useful, ...nonsense]), finalSearchQuestion()];
 }
 
 function tagScore(tags, quest) {
@@ -199,6 +213,16 @@ export default function App() {
   };
 
   const answerQuestion = (choice) => {
+    if (choice.action === "levelOneGuide") {
+      setMode("levelOne");
+      return;
+    }
+
+    if (choice.action === "continueAdventure") {
+      setStep(step + 1);
+      return;
+    }
+
     if (choice.action === "openSearch") {
       const fallback = result || makeResult({ selectedClass, answers });
       window.open(fallback.primarySearch.url, "_blank", "noopener,noreferrer");
@@ -232,6 +256,11 @@ export default function App() {
     setResult(null);
   };
 
+  const continueFromLevelOneGuide = () => {
+    setStep((currentStep) => Math.max(currentStep + 1, 1));
+    setMode("dialogue");
+  };
+
   const generateQuick = () => {
     const fallbackClass = heroClasses.find((hero) => hero.id === "backend");
     setSelectedClass(fallbackClass);
@@ -248,6 +277,10 @@ export default function App() {
     setAnswers(allAnswers);
     setResult(makeResult({ selectedClass: randomClass, answers: allAnswers, randomOnly: true }));
     setMode("results");
+  };
+
+  const openHallOfHeroes = () => {
+    setMode("heroes");
   };
 
   const restart = () => {
@@ -269,6 +302,7 @@ export default function App() {
       <div className="top-actions">
         <button onClick={openQuick}><FastForward size={16} /> I Am In A Hurry, Wizard</button>
         <button onClick={randomQuest}><Dice5 size={16} /> Random Quest</button>
+        <button onClick={openHallOfHeroes}><Trophy size={16} /> Hall of Heroes</button>
         <button onClick={restart}><RotateCcw size={16} /> Reset</button>
       </div>
 
@@ -317,6 +351,14 @@ export default function App() {
 
             {mode === "quick" && (
               <QuickSearch quick={quick} setQuick={setQuick} onGenerate={generateQuick} />
+            )}
+
+            {mode === "levelOne" && (
+              <LevelOneGuide onContinue={continueFromLevelOneGuide} />
+            )}
+
+            {mode === "heroes" && (
+              <HallOfHeroes onBack={restart} />
             )}
 
             {mode === "results" && (

@@ -1296,6 +1296,62 @@ select {
   background: rgba(50,0,17,.80);
 }
 
+.hall-of-heroes {
+  height: 100%;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: .65rem;
+  border: 3px solid var(--tan);
+  background: rgba(50,0,17,.80);
+  padding: .75rem;
+}
+
+.heroes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .65rem;
+  min-height: 0;
+  overflow: auto;
+  padding-right: .2rem;
+}
+
+.hero-entry {
+  border: 3px solid var(--gold);
+  background: rgba(50,0,17,.74);
+  padding: .7rem;
+  display: flex;
+  justify-content: space-between;
+  gap: .75rem;
+  min-height: 118px;
+}
+
+.hero-entry h3 {
+  color: var(--gold);
+  font-size: 1.85rem;
+  line-height: .9;
+  margin-bottom: .35rem;
+}
+
+.hero-entry p {
+  color: var(--stone);
+  line-height: 1.25;
+  margin-bottom: 0;
+}
+
+.hero-entry span {
+  color: var(--tan);
+  font-size: .78rem;
+  white-space: nowrap;
+}
+
+.hero-contribute-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  text-decoration: none;
+}
+
 /* Footer credits */
 .footer-note {
   display: flex;
@@ -1542,4 +1598,54 @@ select {
   .quest-grid.compact {
     grid-template-columns: 1fr;
   }
+
+  .hall-of-heroes {
+    height: auto;
+    overflow: visible;
+  }
+
+  .heroes-grid {
+    grid-template-columns: 1fr;
+    overflow: visible;
+  }
+}
+
+/* Level 1 adventurer guide */
+a.answer-button {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  text-decoration: none;
+}
+
+.level-one-guide {
+  height: 100%;
+}
+
+.level-one-guide .tiny-label {
+  color: var(--wine);
+}
+
+.level-one-options {
+  margin-top: auto;
+}
+
+.wizard-lore {
+  border: 2px dashed var(--tan);
+  background: rgba(183,163,157,.28);
+  padding: .75rem;
+}
+
+.wizard-lore h2 {
+  color: var(--wine);
+  font-size: 2rem;
+  line-height: .9;
+  margin-bottom: .45rem;
+}
+
+.wizard-lore p {
+  color: var(--maroon-dark);
+  font-size: 1rem;
+  line-height: 1.32;
+  margin-bottom: .45rem;
 }
